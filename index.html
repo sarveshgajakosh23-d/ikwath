@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>iKwath – Smart pod-based kwatha maker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header><div class="wrap nav">
+  <a class="brand" href="#top">i<span>Kwath</span></a>
+  <nav aria-label="Main"><ul>
+    <li><a href="#why">Why iKwath</a></li><li><a href="#brew">How it brews</a></li><li><a href="#machine">The machine</a></li>
+    <li><a href="#pods">Pods</a></li><li><a href="#feasibility">Feasibility</a></li><li><a href="#impact">Impact</a></li>
+  </ul></nav>
+  <a class="btn" href="#brew">Try the brew</a>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap">
+  <div class="grid">
+    <div class="reveal">
+      <h1>One pod. One fresh, <em>standardized</em> dose of kwatha.</h1>
+      <p class="lede">iKwath is a countertop kwatha (kadha) maker. Load a pod, and the machine brews, reduces to a quarter and filters the decoction for you. Same decoction, without standing over the stove.</p>
+      <div class="cta"><a class="btn" href="#brew">Watch a brew run</a><a class="btn ghost" href="#machine">See inside the machine</a></div>
+    </div>
+    <figure class="reveal"><img src="assets/hero-machine.jpg" alt="The iKwath countertop machine pouring fresh kwatha into a glass" width="1200" height="669"></figure>
+  </div>
+  <div class="facts">
+    <div><b>400 mL</b><span>water in</span></div>
+    <div><b>85–90°C</b><span>controlled brewing</span></div>
+    <div><b>~100 mL</b><span>fresh kwatha out</span></div>
+  </div>
+</div></section>
+
+<div class="band">Faster preparation, without changing the decoction<small>Quality, constituent profile and extractive yield stay the point</small></div>
+
+<section id="why"><div class="wrap">
+  <h2>Making kwatha well by hand is hard to repeat</h2>
+  <div class="problems">
+    <article><h3>Manual and laborious</h3><p>The right amount of powder, water, heat and reduction is difficult to hold steady by hand.</p></article>
+    <article><h3>Slow reduction</h3><p>Traditional preparation needs a long, slow reduction step, which limits how convenient it is.</p></article>
+    <article><h3>Inconsistent results</h3><p>Small changes in the process can shift dose consistency and extractive yield.</p></article>
+  </div>
+</div></section>
+
+<section class="sim" id="brew" aria-labelledby="brew-h"><div class="wrap">
+  <h2 id="brew-h">Follow one pod from powder to pour</h2>
+  <p class="lede">Press play or drag the slider to step through the iKwath process: 400 mL of water goes in, and about 100 mL of kwatha comes out.</p>
+  <div class="sim-grid">
+    <div class="vessel" role="img" aria-label="Brewing chamber showing water level">
+      <div class="liquid" id="liq"></div>
+      <div class="mark" style="bottom:100%;transform:translateY(100%);top:8px;bottom:auto">400 mL</div>
+      <div class="mark" style="bottom:25%">¼ endpoint, ~100 mL</div>
+      <div class="bubbles" aria-hidden="true"><i style="left:22%;animation-delay:0s"></i><i style="left:45%;animation-delay:.7s"></i><i style="left:68%;animation-delay:1.4s"></i><i style="left:34%;animation-delay:1.1s"></i><i style="left:80%;animation-delay:.3s"></i></div>
+    </div>
+    <div>
+      <div class="read" aria-live="off">
+        <div><b id="ml">0</b><span>mL in chamber</span></div>
+        <div><b id="tc">25°C</b><span>temperature</span></div>
+        <div><b id="st">Ready</b><span>status</span></div>
+      </div>
+      <ol class="steps" id="steps">
+        <li><div><b>Load the kwatha pod</b><small>Standardized coarse powder, single dose</small></div></li>
+        <li><div><b>Add 400 mL water</b><small>Potable, API-quality water</small></div></li>
+        <li><div><b>Controlled brewing at 85–90°C</b><small>Soaking and gentle extraction</small></div></li>
+        <li><div><b>Reduce to ¼ volume</b><small>Controlled evaporation, endpoint monitored</small></div></li>
+        <li><div><b>Filter</b><small>Spent powder removed, clear decoction</small></div></li>
+        <li><div><b>Dispense about 100 mL</b><small>Fresh and warm</small></div></li>
+      </ol>
+      <div class="ctrl">
+        <button class="btn" id="play" type="button">Play brew</button>
+        <input type="range" id="scrub" min="0" max="100" value="0" step="0.1" aria-label="Brew progress">
+      </div>
+      <div class="safety"><span id="s1">Anti-boil-over: standby</span><span id="s2">Dry-run protection: standby</span></div>
+      <p class="note">Illustration of the intended process. It shows the design targets, not measured machine data.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="machine"><div class="wrap">
+  <h2>Inside the machine</h2>
+  <p class="lede">A sensor system watches the brew and a microcontroller runs the sequence, so each pod follows the same path.</p>
+  <div class="sys">
+    <div class="diagram"><img src="assets/exploded-design.jpg" alt="Exploded concept design of iKwath: pod, pod holder, brewing chamber, heating system, sensor system, microcontroller, filter and dispenser" width="1000" height="786" loading="lazy"><p style="font-size:.85rem;color:#55645b;text-align:center">Proposed hardware architecture, conceptual</p></div>
+    <div>
+      <ul class="list">
+        <li><h3>Temperature sensor</h3><p>Keeps heating in the controlled range.</p></li>
+        <li><h3>Weight and level sensor</h3><p>Tracks the water and the reduction.</p></li>
+        <li><h3>Extract-density monitoring</h3><p>Supports consistent doses.</p></li>
+        <li><h3>Microcontroller</h3><p>Controls heating, timing and process sequence.</p></li>
+        <li><h3>Safety control</h3><p>Anti-boil-over and dry-run protection.</p></li>
+      </ul>
+      <div class="chain" aria-label="Hardware flow"><span>Pod</span><span>Brewing chamber</span><span>Heater</span><span>Sensors</span><span>Controller</span><span>Filter</span><span>Dispenser</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="pods" id="pods"><div class="wrap pod-grid">
+  <img src="assets/countertop-scene.jpg" alt="iKwath machine on a kitchen counter next to a kwatha pod and a glass of kwatha" width="634" height="506" loading="lazy">
+  <div>
+    <h2>The pod carries the recipe</h2>
+    <p class="lede">Each pod holds standardized coarse powder for a single dose. It also defines the formulation-specific parameters, so changing the formulation means changing the pod.</p>
+    <div class="profile">
+      <div><b>Water</b><span>~400 mL</span></div>
+      <div><b>Temperature</b><span>85–90°C</span></div>
+      <div><b>Endpoint</b><span>Reduce to ¼ volume</span></div>
+      <div><b>Output</b><span>~100 mL, one dose</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="feasibility"><div class="wrap">
+  <h2>Built from parts that already work</h2>
+  <p class="lede">Each challenge in making kwatha maps to a control the machine already has.</p>
+  <table>
+    <thead><tr><th>Challenge</th><th>How iKwath handles it</th></tr></thead>
+    <tbody>
+      <tr><td>Slow preparation</td><td>Controlled brewing and reduction.</td></tr>
+      <tr><td>Manual variation</td><td>Formulation-specific pod parameters.</td></tr>
+      <tr><td>Inconsistent process</td><td>Temperature, weight and extract-density monitoring.</td></tr>
+      <tr><td>Cleaning and safety</td><td>Safety controls and a removable, dishwasher-safe chamber and filter.</td></tr>
+    </tbody>
+  </table>
+  <div class="use">
+    <div><h3>Home and clinic</h3><p>Compact countertop appliance.</p></div>
+    <div><h3>Single-dose pods</h3><p>Standardized coarse powder.</p></div>
+    <div><h3>Many formulations</h3><p>Swap the pod, change the formulation.</p></div>
+    <div><h3>Easy cleaning</h3><p>Removable chamber and filter.</p></div>
+  </div>
+  <p class="valid">Built for validation against AFI and API requirements.</p>
+</div></section>
+
+<section id="impact" style="background:var(--panel)"><div class="wrap">
+  <h2>What changes for the person making kwatha</h2>
+  <div class="shift">
+    <div><s>Manual preparation</s><b>Automated preparation</b></div>
+    <div><s>Slow reduction</s><b>Controlled brewing and reduction</b></div>
+    <div><s>Process variation</s><b>Formulation-specific pod parameters</b></div>
+    <div><s>Cleaning effort</s><b>Removable chamber and filter</b></div>
+  </div>
+  <div class="gallery">
+    <figure><img src="assets/kwatha-glass.jpg" alt="A glass of kwatha beside herbs and cinnamon" loading="lazy"></figure>
+    <figure><img src="assets/clay-pot.jpg" alt="Traditional clay pot of kwatha with herbs" loading="lazy"></figure>
+    <figure><img src="assets/kadha-herbs.jpg" alt="Steaming pot of decoction surrounded by Ayurvedic herbs" loading="lazy"></figure>
+  </div>
+  <p class="one">One pod, one fresh standardized dose.</p>
+  <div class="use" style="grid-template-columns:repeat(3,1fr)">
+    <div><h3>Consistent preparation</h3><p>Controlled temperature, volume and endpoint.</p></div>
+    <div><h3>On-demand kwatha</h3><p>Fresh, warm decoction when you need it.</p></div>
+    <div><h3>Quality control</h3><p>Designed to preserve the required decoction quality and extractive yield.</p></div>
+    <div><h3>Standardized pods</h3><p>Single-dose coarse powder with formulation-specific parameters.</p></div>
+    <div><h3>Home use</h3><p>Compact countertop preparation.</p></div>
+    <div><h3>Clinic use</h3><p>Supports standardized preparation in Ayurvedic settings.</p></div>
+  </div>
+</div></section>
+
+<section class="refs" id="refs"><div class="wrap">
+  <h2>Research and references</h2>
+  <ul>
+    <li><b>Formulary Specification of AYUSH Kvātha Cūrṇa (2020)</b>, Ministry of AYUSH, Government of India. Basis for Smart India Hackathon problem statement 26048.</li>
+    <li><b>Ayurvedic Pharmacopoeia of India, Part I, Vol. XI</b>, PCIM&amp;H.</li>
+    <li><b>Classical References of Compound Formulations</b>, All India Institute of Ayurveda.</li>
+    <li><b>PCIM&amp;H Ayurvedic Monograph Database</b>, pharmacopoeial and formulary monographs.</li>
+  </ul>
+</div></section>
+</main>
+
+<footer><div class="wrap row">
+  <div><a class="brand" href="#top">i<span>Kwath</span></a><p>A pod-based smart kwatha (kadha) maker for MedTech, BioTech and HealthTech.</p></div>
+  <div class="meta"><b>The Infinity Loops</b><br>Smart India Hackathon, PS 26048<br>Team ID 172414, Hardware category</div>
+</div></footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
